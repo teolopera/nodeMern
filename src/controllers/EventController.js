@@ -5,7 +5,7 @@ module.exports = {
 
     async createEvent(req, res){
 
-        const { title, description, price } = req.body;
+        const { title, description, price, sport } = req.body;
         console.log(req.headers)
         const { userid } = req.headers;
         /* IMAGEN */
@@ -20,6 +20,7 @@ module.exports = {
         const event = await Event.create({
             title,
             description,
+            sport,
             price: parseFloat(price),
             user: userid,
             thumbnail: filename
@@ -28,18 +29,18 @@ module.exports = {
         return res.json(event);
     },
 
-    async getEventById(req, res){
+    async deleteEvent(req, res){
 
         const { eventId } = req.params;
-        
-        const event = await Event.findById(eventId)
 
         try {
-            if(event){
-                return res.json(event)
-            }
+            await Event.findByIdAndDelete(eventId)
+            return res.status(204).json(
+                { message: 'Succesfully deleted' }
+            )
+
         } catch (error) {
-            return res.status(400).json({message: 'EventId does not exist.'})
+            return res.status(400).json({message: 'We do not have any event with the ID.'})
         }
     }
 }

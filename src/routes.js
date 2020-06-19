@@ -1,9 +1,12 @@
 const express = require('express');
 const multer = require('multer')
 
+/* CONTROLLERS */
 const UserController = require('./controllers/UserController')
 const EventController = require('./controllers/EventController')
 const uploadConfig = require('./config/upload');
+const DashboardController = require('./controllers/DashboardController');
+const LoginController = require('./controllers/LoginController');
 
 /* ES UN MIDDLEWARE QUE NOS PERMITE IMPORTAR RUTAS DESDE OTROS ARCHIVOS E 
 INYECTARLAS A EXPRESS*/
@@ -15,9 +18,20 @@ routes.get('/', (req, res) => {
     res.send({ status: 200 });
 })
 
+//TODO Subscribe Controller
+// TODO Aproval Controller
+// TODO Rejection Controller
+
+/* Login */
+routes.post('/login', LoginController.store)
+
+/* Dashboard */
+routes.get('/dashboard/:sport', DashboardController.getAllEvents)
+routes.get('/dashboard', DashboardController.getAllEvents)
+routes.get('/event/:eventId', DashboardController.getEventById)
+
 /* Event */
-routes.get('/events')
-routes.get('/event/:eventId', EventController.getEventById)
+routes.delete('/event/:eventId', EventController.deleteEvent)
 routes.post('/event', upload.single('thumbnail'), EventController.createEvent)
 
 /* User */

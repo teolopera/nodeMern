@@ -4,6 +4,7 @@ const EventSchema = new mongoose.Schema({
     title: String,
     description: String,
     price: Number,
+    sport: String,
     /* EN LA BASE DE DATOS NO VAMOS A GUARDAR LA IMAGEN, SINO LA URL DE LA UBICACION DE LA IMAGEN */
     thumbnail: String,
     date: Date,
