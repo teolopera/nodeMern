@@ -7,6 +7,7 @@ const EventController = require('./controllers/EventController')
 const uploadConfig = require('./config/upload');
 const DashboardController = require('./controllers/DashboardController');
 const LoginController = require('./controllers/LoginController');
+const RegistrationController = require('./controllers/RegistrationController');
 
 /* ES UN MIDDLEWARE QUE NOS PERMITE IMPORTAR RUTAS DESDE OTROS ARCHIVOS E 
 INYECTARLAS A EXPRESS*/
@@ -21,6 +22,9 @@ routes.get('/', (req, res) => {
 //TODO Subscribe Controller
 // TODO Aproval Controller
 // TODO Rejection Controller
+
+/* Registration */
+routes.post('/registration/:eventId', RegistrationController.create)
 
 /* Login */
 routes.post('/login', LoginController.store)
