@@ -22,7 +22,7 @@ module.exports = {
     
         const { sport } = req.params;
         /* SI HAY ALGUN DEPORTE QUE BUSQUE LOS EVENTOS X DEPORTE, SINO RETORNA TODOS LOS EVENTOS */
-        const query = { sport } || {};
+        const query = sport ? { sport } : {};
     
         try {
             /* RETORNARA TODOS LOS EVENTOS */

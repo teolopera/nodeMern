@@ -30,7 +30,12 @@ module.exports = {
                     }
                 );
 
-                return res.status(200).json(user);
+                return res.status(200).json({
+                    _id: user._id,
+                    email: user.email,
+                    firstName: user.firstName,
+                    lastName: user.lastName
+                });
             }
 
             return res.status(400).json({
